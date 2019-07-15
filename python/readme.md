@@ -12,11 +12,11 @@ Scripts:
 * `rewrite_images.py`: This script must be run before the others. It
   rewrites the test images as 2-dimensional FITS images.
 
-  The need for this comes from an annoying limitation of astropy. Most
+  The need for this comes from an annoying limitation of cfitsio. Most
   of the images are 4-dimensional, with frequency and polarisation
   axes too, even if the size along these axes is 1. fpack will happily
-  compress 4-dimensional images, but the scripts use astropy to read
-  them afterwards, and it will only handle compressed images with up
+  compress 4-dimensional images, but they can't be read directly with
+  astropy because cfitsio will only handle compressed images with up
   to 3 dimensions.
 
 * `plot_images.py`: Plots the test images.
