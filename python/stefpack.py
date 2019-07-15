@@ -3,12 +3,13 @@ based on his original Matlab code.
 
 CAVEATS:
 
-- The quantisation of the values sometimes disagrees with the Matlab
-  version. This is because the numpy `rint` function behaves
-  differently from the Matlab `round` function for values with
-  fractional part exactly 0.5 (`round` rounds away from zero, whereas
-  `rint` rounds to the nearest even value following the IEEE 754
-  floating point standard).
+- To match the quantisation behaviour of the Matlab code exactly, the
+  `quantise` function must be called with the option
+  `matlab_round=True`. This mimics the behaviour of the Matlab `round`
+  function which always rounds values with fractional part 0.5 away
+  from zero. Otherwise, it defaults to using the numpy `rint` function
+  which rounds values with fractional part 0.5 to the nearest even
+  value following the IEEE 754 standard.
 
 - if you read a file compressed with the Matlab code, you need to
   transpose the image afterwards (the ordering of the pixels is
@@ -19,29 +20,46 @@ CAVEATS:
 import numpy as np
 
 
-def quantise(image, ng=2, blocksize=32):
+def quantise(image, ng=0, blocksize=32, matlab_round=False):
     """Quantise image."""
 
     # Get minimum RMS of image.
 
     irms = minrms(image, blocksize=blocksize)
 
-    # Compute number of bits and scale factor.
+    # Compute number of bits for scaling.
 
     nb = int(np.floor(1 - np.log2(irms))) + ng
-    f1 = 2**nb
 
-    # Scale image and remove offset.
+    # Scale image and quantise.
 
-    image_quant = np.rint(f1 * image)
+    if matlab_round:
+
+        # Mimic Matlab round function: if a number has a fractional
+        # part 0.5 it always rounded away from zero.
+
+        tmp = (2**nb) * image
+        image_quant = np.where(np.rint(tmp + 1) - np.rint(tmp) == 1,
+                               np.rint(tmp),
+                               np.trunc(tmp) + np.sign(tmp))
+
+    else:
+
+        # Use standard rint rounding: if a number has fractional part
+        # 0.5, it is rounded to the nearest even number.
+
+        image_quant = np.rint((2**nb) * image)
+
+    # Remove offset.
+
     imin = -np.min(image_quant)
     image_quant += imin
-    
+
     # Convert to integer data types.
 
     imin = int(imin)
     image_quant = image_quant.astype(np.uint32)
-    
+
     return nb, imin, image_quant
 
 

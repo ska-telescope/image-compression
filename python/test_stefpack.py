@@ -25,7 +25,10 @@ print('Image shape:', image_orig.shape)
 
 print('Quantising image')
 
-nb, imin, image_quant = sp.quantise(image_orig, ng=ng)
+# Use matlab_round=True to exactly mimic Matlab behaviour.
+
+nb, imin, image_quant = sp.quantise(image_orig, ng=ng,
+                                    matlab_round=True)
 
 print('nb:', nb)
 print('imin:', imin)
@@ -73,9 +76,9 @@ i = image_quant_mat.T != image_quant
 nbad = i.sum()
 if nbad > 0:
     print(nbad, 'pixels disagree')
-    print('Values in original image, quantised image and Matlab quantised image:')
-    print(image_orig[i])
-    print(image_quant[i])
-    print(image_quant_mat.T[i])
+    print('Original image values:', image_orig[i])
+    print('Scaled image values:', (2**nb)*image_orig[i])
+    print('Quantised image values (minus offset)', image_quant[i]-imin)
+    print('Matlab quantised image values (minus offset)', image_quant_mat.T[i]-imin)
 else:
-    print('All pixels good')
+    print('image good:', True)
