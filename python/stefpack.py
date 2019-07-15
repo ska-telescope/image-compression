@@ -146,7 +146,7 @@ def write_compressed(filename, nb, imin, image_quant):
 
     with open(filename, 'w') as f:
         np.int64(nx).tofile(f)
-        np.int64(nx).tofile(f)
+        np.int64(ny).tofile(f)
         np.int32(nb).tofile(f)
         np.int32(imin).tofile(f)
         np.int32(lenbit).tofile(f)
