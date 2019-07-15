@@ -32,8 +32,3 @@ Scripts:
 
 * `test_stefpack.py`: Tests stefpack against a compressed file written
   by the Matlab code.
-
-  The quantised values sometimes disagree because the rounding of
-  values with fractional part 0.5 is implemented differently in Matlab
-  and numpy. Matlab rounds away from zero, whereas numpy rounds to the
-  nearest even value following the IEEE 754 floating point standard.
