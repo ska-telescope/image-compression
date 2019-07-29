@@ -35,3 +35,8 @@ Scripts:
 
 * `test_stefpack.py`: Tests stefpack against a compressed file written
   by the Matlab code.
+
+* `combine_images.py`: Toy example of combining compressed
+  images. Simulates noise-only images, then combines them without and
+  with quantisation. Plots histograms of pixel values in input and
+  output images.

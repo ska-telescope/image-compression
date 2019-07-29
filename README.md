@@ -10,7 +10,10 @@ tested are:
   - [fpack and funpack][3]
 * [HDF5 compression][4]
 
-The results are in the [SKA Confluence][5].
+The results are in the SKA Confluence:
+
+* [Comparison of image compression methods][5]
+* [Combining compressed images][6]
 
 The directories contain:
 
@@ -35,3 +38,4 @@ To run the comparison scripts you need:
 [3]: https://heasarc.gsfc.nasa.gov/fitsio/fpack/
 [4]: https://portal.hdfgroup.org/display/HDF5/HDF5
 [5]: https://confluence.skatelescope.org/display/SE/Comparison+of+image+compression+methods
+[6]: https://confluence.skatelescope.org/display/SE/Combining+compressed+images
