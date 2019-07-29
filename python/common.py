@@ -20,12 +20,14 @@ datasets = [
 ]
 
 
-def read_image(ifile, hdu=0):
+def read_image(ifile, hdu=0, squeeze=True):
     """Read FITS image and get its size."""
 
     size = os.path.getsize(ifile)
     with fits.open(ifile) as f:
-        image = f[hdu].data.squeeze()
+        image = f[hdu].data
+    if squeeze:
+        image = image.squeeze()
     return size, image
 
 

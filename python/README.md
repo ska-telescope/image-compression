@@ -30,5 +30,8 @@ Scripts:
 * `compress_fpack_tiles.py`: Runs fpack compression to test the effect
   of varying the tile shape.
 
+* `compress_hdf5.py`: Runs HDF5 compression to test the effect of
+  varying the scale parameter.
+
 * `test_stefpack.py`: Tests stefpack against a compressed file written
   by the Matlab code.

@@ -8,8 +8,9 @@ tested are:
 * FITS image compression, see
   - [FITS tiled image compression convention][2]
   - [fpack and funpack][3]
+* [HDF5 compression][4]
 
-The results are in the [SKA Confluence][4].
+The results are in the [SKA Confluence][5].
 
 The directories contain:
 
@@ -25,10 +26,12 @@ To run the comparison scripts you need:
   - numpy
   - matplotlib
   - astropy
+  - h5py
 * fpack binary from cfitsio (note this is not compiled by default, you
   need to do `make fpack`)
 
 [1]: https://drive.google.com/drive/folders/1JcTRUYsU7px1KMBUgq0H3z9H9Uza9Fro
 [2]: https://fits.gsfc.nasa.gov/registry/tilecompression.html
 [3]: https://heasarc.gsfc.nasa.gov/fitsio/fpack/
-[4]: https://confluence.skatelescope.org/display/SE/Comparison+of+image+compression+methods
+[4]: https://portal.hdfgroup.org/display/HDF5/HDF5
+[5]: https://confluence.skatelescope.org/display/SE/Comparison+of+image+compression+methods
